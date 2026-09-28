@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.github.jonathanparra1013.gestionenvios.InterfazGraficaEnvio;
-
+import com.github.jonathanparra1013.gestionenvios.*;
+import java.util.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author jonap
@@ -11,11 +13,12 @@ package com.github.jonathanparra1013.gestionenvios.InterfazGraficaEnvio;
 public class InterfazGraficEnvio extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InterfazGraficEnvio.class.getName());
-
+    ArrayList<Envio> listaEnvios = new ArrayList<>();
     /**
      * Creates new form InterfazGraficEnvio
      */
     public InterfazGraficEnvio() {
+        
         initComponents();
     }
 
@@ -31,33 +34,32 @@ public class InterfazGraficEnvio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         tipos = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
+        txtDestinatario = new javax.swing.JTextField();
+        txtPeso = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        txtDireccion = new javax.swing.JTextField();
+        txtHoraLimite = new javax.swing.JTextField();
+        txtPaisDestino = new javax.swing.JTextField();
+        lblDireccion = new javax.swing.JLabel();
+        lblHoraLimite = new javax.swing.JLabel();
+        lblPaisDestino = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaEnvios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estandar", "Express", "Internacional" }));
+        tipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Estandar", "Express", "Internacional" }));
         tipos.addActionListener(this::tiposActionPerformed);
 
         jLabel1.setText("Elija el Tipo de Envio que desea:");
 
-        jTextField1.setText("Codigo");
+        txtCodigo.addActionListener(this::txtCodigoActionPerformed);
 
-        jTextField2.setText("destinatario");
-
-        jTextField3.setText("peso");
-        jTextField3.addActionListener(this::jTextField3ActionPerformed);
+        txtPeso.addActionListener(this::txtPesoActionPerformed);
 
         jLabel2.setText("Codigo");
 
@@ -65,69 +67,86 @@ public class InterfazGraficEnvio extends javax.swing.JFrame {
 
         jLabel4.setText("Peso");
 
-        jTextField4.setText("direccion");
+        txtDireccion.addActionListener(this::txtDireccionActionPerformed);
 
-        jTextField5.setText("horaLimite");
+        txtPaisDestino.addActionListener(this::txtPaisDestinoActionPerformed);
 
-        jTextField6.setText("paisDestino");
-        jTextField6.addActionListener(this::jTextField6ActionPerformed);
+        lblDireccion.setText("Direccion");
 
-        jLabel5.setText("Direccion");
+        lblHoraLimite.setText("Hora Limite");
 
-        jLabel6.setText("Hora Limite");
-
-        jLabel7.setText("Pais Destino");
+        lblPaisDestino.setText("Pais Destino");
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
+
+        tablaEnvios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Destinatario", "Peso", "Tipo", "Valor a Pagar"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaEnvios);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tipos, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(jLabel2)))
-                        .addGap(66, 66, 66)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(56, 56, 56)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField6)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(25, 25, 25))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(352, 352, 352)
+                .addGap(351, 351, 351)
                 .addComponent(btnRegistrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tipos, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(22, 22, 22)
+                                        .addComponent(jLabel2)))
+                                .addGap(66, 66, 66)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtDestinatario, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                                .addGap(56, 56, 56)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(59, 59, 59)
+                                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblDireccion)
+                                        .addGap(11, 11, 11)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblHoraLimite)
+                                    .addComponent(txtHoraLimite, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPaisDestino)
+                                    .addComponent(txtPaisDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,20 +160,22 @@ public class InterfazGraficEnvio extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(lblDireccion)
+                    .addComponent(lblHoraLimite)
+                    .addComponent(lblPaisDestino))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDestinatario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHoraLimite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPaisDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addComponent(btnRegistrar)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,21 +199,130 @@ public class InterfazGraficEnvio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        
+        String codigo = txtCodigo.getText();
+        String nombreDestinatario = txtDestinatario.getText();
+        double peso = Double.parseDouble(txtPeso.getText());
+        
+        String modoEnvio = tipos.getSelectedItem().toString();
+        Envio nuevoEnvio = null;
+                
+        if(modoEnvio == "Estandar"){
+            String direccion = txtDireccion.getText();
+            nuevoEnvio = new Estandar(direccion, codigo, nombreDestinatario, peso);
+         
+        }if(modoEnvio == "Express"){
+            String hora_limite = txtHoraLimite.getText();
+            nuevoEnvio = new Express(hora_limite, codigo, nombreDestinatario, peso);
+            
+        }if(modoEnvio == "Internacional"){
+            String pais_destino = txtPaisDestino.getText();
+            nuevoEnvio = new Internacional(pais_destino, codigo, nombreDestinatario, peso);
+        }
+        
+        if(nuevoEnvio != null) {
+            listaEnvios.add(nuevoEnvio);
+           
+            JOptionPane.showMessageDialog(this, "Envío registrado con éxito, Valor a pagar:" + nuevoEnvio.calcularCosto());
+            
+            actualizarTabla();
+            this.vaciarCampos();
+        }
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtPesoActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void txtPaisDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPaisDestinoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_txtPaisDestinoActionPerformed
 
     private void tiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiposActionPerformed
-        // TODO add your handling code here:
+        String opcion = tipos.getSelectedItem().toString();
+        if("Seleccione".equals(opcion)){
+            txtDireccion.setVisible(false);
+            lblDireccion.setVisible(false);
+            
+            txtPaisDestino.setVisible(false);
+            lblPaisDestino.setVisible(false);
+            
+            txtHoraLimite.setVisible(false);
+            lblHoraLimite.setVisible(false);
+        }
+        if(opcion == "Estandar"){
+            txtDireccion.setVisible(true);
+            lblDireccion.setVisible(true);
+            
+            txtPaisDestino.setVisible(false);
+            lblPaisDestino.setVisible(false);
+            
+            txtHoraLimite.setVisible(false);
+            lblHoraLimite.setVisible(false);
+        }if(opcion == "Express"){
+            txtDireccion.setVisible(false);
+            lblDireccion.setVisible(false);
+            
+            txtPaisDestino.setVisible(false);
+            lblPaisDestino.setVisible(false);
+            
+            txtHoraLimite.setVisible(true);
+            lblHoraLimite.setVisible(true);
+            
+        }if(opcion == "Internacional"){
+            txtDireccion.setVisible(false);
+            lblDireccion.setVisible(false);
+            
+            txtPaisDestino.setVisible(true);
+            lblPaisDestino.setVisible(true);
+            
+            txtHoraLimite.setVisible(false);
+            lblHoraLimite.setVisible(false);
+        }
     }//GEN-LAST:event_tiposActionPerformed
 
+    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDireccionActionPerformed
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
+    
+    private void actualizarTabla() {
+    String[] titulos = {"Codigo", "Destinatario", "Peso", "Tipo", "Valor a Pagar"};
+    javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(null, titulos);
+    
+    for (Envio envio : listaEnvios) {
+        String tipo = "";
+        
+        if (envio instanceof Estandar) {
+            tipo = "Estandar";
+        }if (envio instanceof Express) {
+            tipo = "Express";
+        }if (envio instanceof Internacional) {
+            tipo = "Internacional";
+        }
+
+        Object[] fila = {
+            envio.getCodigoEnvio(),envio.getNombreDestinatario(),envio.getPeso(),tipo,envio.calcularCosto()
+        };
+
+        modelo.addRow(fila);
+    }
+
+    tablaEnvios.setModel(modelo);
+}
+    
+    private void vaciarCampos(){
+        txtCodigo.setText("");
+        txtDestinatario.setText("");
+        txtPeso.setText("");
+        txtDireccion.setText("");
+        txtHoraLimite.setText("");
+        txtPaisDestino.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -224,16 +354,18 @@ public class InterfazGraficEnvio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDireccion;
+    private javax.swing.JLabel lblHoraLimite;
+    private javax.swing.JLabel lblPaisDestino;
+    private javax.swing.JTable tablaEnvios;
     private javax.swing.JComboBox<String> tipos;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtDestinatario;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtHoraLimite;
+    private javax.swing.JTextField txtPaisDestino;
+    private javax.swing.JTextField txtPeso;
     // End of variables declaration//GEN-END:variables
 }

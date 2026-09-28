@@ -11,4 +11,7 @@ package com.github.jonathanparra1013.gestionenvios;
 public interface Envio {
     
     public double calcularCosto();
+    String getCodigoEnvio();
+    String getNombreDestinatario();
+    double getPeso();
 }

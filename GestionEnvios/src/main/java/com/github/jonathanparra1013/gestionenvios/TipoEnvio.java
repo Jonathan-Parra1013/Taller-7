@@ -7,7 +7,7 @@ package com.github.jonathanparra1013.gestionenvios;
  *
  * @author jonap
  */
-public abstract class TipoEnvio {
+public abstract class TipoEnvio implements Envio{
     protected String codigoEnvio;
     protected String nombreDestinatario;
     protected double peso; 
